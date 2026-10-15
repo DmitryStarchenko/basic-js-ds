@@ -13,26 +13,40 @@ const { NotImplementedError } = require("../lib");
  * queue.getUnderlyingList() // returns { value: 3, next: null }
  */
 class Queue {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+  }
+
   getUnderlyingList() {
     return this.head;
   }
 
   enqueue(value) {
-    const newNode = new ListNode(value);
-    if (!this.head && !this.tail) {
-      this.head = newNode;
-      this.tail = newNode;
-      return this;
+    const node = { value, next: null };
+
+    if (this.tail) {
+      this.tail.next = node;
+    } else {
+      this.head = node;
     }
-    this.tail.next = newNode;
-    this.tail = newNode;
-    return this;
+
+    this.tail = node;
   }
 
   dequeue() {
-    let currentNode = this.head;
-    this.head = currentNode.next;
-    return currentNode.value;
+    if (!this.head) {
+      return undefined;
+    }
+
+    const { value } = this.head;
+    this.head = this.head.next;
+
+    if (!this.head) {
+      this.tail = null;
+    }
+
+    return value;
   }
 }
 
