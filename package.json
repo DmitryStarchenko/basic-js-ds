@@ -10,7 +10,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node --test --test-reporter tap"
+    "test": "node --test --test-reporter tap",
+    "testPlus": "node --test"
   },
   "repository": {
     "type": "git",
